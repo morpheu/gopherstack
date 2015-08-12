@@ -71,7 +71,7 @@ func (c CloudstackClient) WaitForAsyncJob(jobId string, timeout time.Duration) e
 
 // WaitForVirtualMachineState simply blocks until the virtual machine
 // is in the specified state.
-func (c CloudstackClient) WaitForVirtualMachineState(vmid string, wantedState string, timeout time.Duration) error {
+func (c CloudstackClient) WaitForVirtualMachineState(vmid string, wantedState string, timeout time.Duration, projectid string, account string) error {
 	done := make(chan struct{})
 	defer close(done)
 
@@ -82,7 +82,7 @@ func (c CloudstackClient) WaitForVirtualMachineState(vmid string, wantedState st
 			attempts += 1
 
 			log.Printf("Checking virtual machine state... (attempt: %d)", attempts)
-			response, err := c.ListVirtualMachines(vmid)
+			response, err := c.ListVirtualMachines(vmid, projectid, account)
 			if err != nil {
 				result <- err
 				return

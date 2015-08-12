@@ -14,7 +14,12 @@ func (c CloudstackClient) DeployVirtualMachine(serviceofferingid string, templat
 	params.Set("serviceofferingid", serviceofferingid)
 	params.Set("templateid", templateid)
 	params.Set("zoneid", zoneid)
-	//	params.Set("account", account)
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
 	if diskofferingid != "" {
 		params.Set("diskofferingid", diskofferingid)
 	}
@@ -24,7 +29,6 @@ func (c CloudstackClient) DeployVirtualMachine(serviceofferingid string, templat
 		params.Set("networkids", strings.Join(networkids, ","))
 	}
 	params.Set("keypair", keypair)
-	//	params.Set("projectid", projectid)
 	if userdata != "" {
 		params.Set("userdata", base64.StdEncoding.EncodeToString([]byte(userdata)))
 	}
@@ -36,7 +40,7 @@ func (c CloudstackClient) DeployVirtualMachine(serviceofferingid string, templat
 	return resp, nil
 }
 
-func (c CloudstackClient) UpdateVirtualMachine(id string, displayname string, group string, haenable string, ostypeid string, userdata string) (UpdateVirtualMachineResponse, error) {
+func (c CloudstackClient) UpdateVirtualMachine(id string, displayname string, group string, haenable string, ostypeid string, userdata string, account string, projectid string) (UpdateVirtualMachineResponse, error) {
 	var resp UpdateVirtualMachineResponse
 
 	params := url.Values{}
@@ -46,6 +50,12 @@ func (c CloudstackClient) UpdateVirtualMachine(id string, displayname string, gr
 	//	params.Set("haenable", haenable)
 	//	params.Set("ostypeid", ostypeid)
 	params.Set("userdata", base64.StdEncoding.EncodeToString([]byte(userdata)))
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
 	response, err := NewRequest(c, "updateVirtualMachine", params)
 	if err != nil {
 		return resp, err
@@ -55,10 +65,16 @@ func (c CloudstackClient) UpdateVirtualMachine(id string, displayname string, gr
 }
 
 // Stops a Virtual Machine
-func (c CloudstackClient) StopVirtualMachine(id string) (StopVirtualMachineResponse, error) {
+func (c CloudstackClient) StopVirtualMachine(id string, account string, projectid string) (StopVirtualMachineResponse, error) {
 	var resp StopVirtualMachineResponse
 	params := url.Values{}
 	params.Set("id", id)
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
 	response, err := NewRequest(c, "stopVirtualMachine", params)
 	if err != nil {
 		return resp, err
@@ -68,10 +84,16 @@ func (c CloudstackClient) StopVirtualMachine(id string) (StopVirtualMachineRespo
 }
 
 // Destroys a Virtual Machine
-func (c CloudstackClient) DestroyVirtualMachine(id string) (DestroyVirtualMachineResponse, error) {
+func (c CloudstackClient) DestroyVirtualMachine(id string, account string, projectid string) (DestroyVirtualMachineResponse, error) {
 	var resp DestroyVirtualMachineResponse
 	params := url.Values{}
 	params.Set("id", id)
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
 	response, err := NewRequest(c, "destroyVirtualMachine", params)
 	if err != nil {
 		return resp, err
@@ -81,10 +103,16 @@ func (c CloudstackClient) DestroyVirtualMachine(id string) (DestroyVirtualMachin
 }
 
 // Returns Cloudstack string representation of the Virtual Machine state
-func (c CloudstackClient) ListVirtualMachines(id string) (ListVirtualMachinesResponse, error) {
+func (c CloudstackClient) ListVirtualMachines(id string, projectid string, account string) (ListVirtualMachinesResponse, error) {
 	var resp ListVirtualMachinesResponse
 	params := url.Values{}
 	params.Set("id", id)
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
 	response, err := NewRequest(c, "listVirtualMachines", params)
 	if err != nil {
 		return resp, err
