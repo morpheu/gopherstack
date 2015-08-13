@@ -5,10 +5,16 @@ import (
 )
 
 // Create a SSH key pair
-func (c CloudstackClient) CreateSSHKeyPair(name string) (CreateSshKeyPairResponse, error) {
+func (c CloudstackClient) CreateSSHKeyPair(name string, projectid string, account string) (CreateSshKeyPairResponse, error) {
 	var resp CreateSshKeyPairResponse
 	params := url.Values{}
 	params.Set("name", name)
+    if projectid != nil {
+	    params.Set("projectid", projectid)
+    }
+    if account != nil {
+	    params.Set("account", account)
+    }
 	response, err := NewRequest(c, "createSSHKeyPair", params)
 	if err != nil {
 		return resp, err
@@ -18,10 +24,16 @@ func (c CloudstackClient) CreateSSHKeyPair(name string) (CreateSshKeyPairRespons
 }
 
 // Deletes an SSH key pair
-func (c CloudstackClient) DeleteSSHKeyPair(name string) (DeleteSshKeyPairResponse, error) {
+func (c CloudstackClient) DeleteSSHKeyPair(name string, projectid string, account string) (DeleteSshKeyPairResponse, error) {
 	var resp DeleteSshKeyPairResponse
 	params := url.Values{}
 	params.Set("name", name)
+    if projectid != nil {
+	    params.Set("projectid", projectid)
+    }
+    if account != nil {
+	    params.Set("account", account)
+    }
 	response, err := NewRequest(c, "deleteSSHKeyPair", params)
 	if err != nil {
 		return resp, err

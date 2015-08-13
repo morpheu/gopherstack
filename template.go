@@ -33,6 +33,12 @@ func (c CloudstackClient) CreateTemplate(options *CreateTemplate) (CreateTemplat
 	if options.Passwordenabled {
 		params.Set("passwordenabled", "true")
 	}
+    if options.ProjectId != ""{
+        params.Set("projectid", options.ProjectId)
+    }
+    if options.Account != ""{
+        params.Set("account", options.Account)
+    }
 
 	response, err := NewRequest(c, "createTemplate", params)
 	if err != nil {
