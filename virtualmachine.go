@@ -84,7 +84,7 @@ func (c CloudstackClient) StopVirtualMachine(id string, account string, projecti
 }
 
 // Destroys a Virtual Machine
-func (c CloudstackClient) DestroyVirtualMachine(id string, account string, projectid string) (DestroyVirtualMachineResponse, error) {
+func (c CloudstackClient) DestroyVirtualMachine(id string, projectid string, account string) (DestroyVirtualMachineResponse, error) {
 	var resp DestroyVirtualMachineResponse
 	params := url.Values{}
 	params.Set("id", id)

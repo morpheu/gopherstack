@@ -50,11 +50,19 @@ func (c CloudstackClient) CreateTemplate(options *CreateTemplate) (CreateTemplat
 }
 
 // Returns all available templates
-func (c CloudstackClient) ListTemplates(name string, filter string) (ListTemplatesResponse, error) {
+func (c CloudstackClient) ListTemplates(name string, filter string, project_id string, account string) (ListTemplatesResponse, error) {
 	var resp ListTemplatesResponse
 	params := url.Values{}
 	params.Set("name", name)
 	params.Set("templatefilter", filter)
+
+    if account != "" {
+		params.Set("account", account)
+	}
+	if project_id != "" {
+		params.Set("projectid", project_id)
+	}
+
 	response, err := NewRequest(c, "listTemplates", params)
 	if err != nil {
 		return resp, err
@@ -65,10 +73,18 @@ func (c CloudstackClient) ListTemplates(name string, filter string) (ListTemplat
 }
 
 // Deletes an template by its ID.
-func (c CloudstackClient) DeleteTemplate(id string) (DeleteTemplateResponse, error) {
+func (c CloudstackClient) DeleteTemplate(id string, project_id string, account string) (DeleteTemplateResponse, error) {
 	var resp DeleteTemplateResponse
 	params := url.Values{}
 	params.Set("id", id)
+
+    if account != "" {
+		params.Set("account", account)
+	}
+	if project_id != "" {
+		params.Set("projectid", project_id)
+	}
+
 	response, err := NewRequest(c, "deleteTemplate", params)
 	if err != nil {
 		return resp, err
@@ -108,6 +124,7 @@ type Template struct {
 	Ostypeid         string  `json:"ostypeid"`
 	Ostypename       string  `json:"ostypename"`
 	Passwordenabled  bool    `json:"passwordenabled"`
+    ProjectId        string  `json:"projectid"`
 	Size             float64 `json:"size"`
 	Sourcetemplateid string  `json:"sourcetemplateid"`
 	Sshkeyenabled    bool    `json:"sshkeyenabled"`
@@ -136,4 +153,6 @@ type CreateTemplate struct {
 	Passwordenabled       bool   `json:"passwordenabled"`
 	Snapshotid            string `json:"snapshotid"`
 	Volumeid              string `json:"volumeid"`
+    ProjectId             string `json:"projectid"`
+    Account               string `json:"account"`
 }

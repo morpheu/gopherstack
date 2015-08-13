@@ -5,11 +5,19 @@ import (
 )
 
 // List volumes for Virtual Machine by it's ID
-func (c CloudstackClient) ListVolumes(vmid string) (ListVolumesResponse, error) {
+func (c CloudstackClient) ListVolumes(vmid string, projectid string, account string) (ListVolumesResponse, error) {
 	var resp ListVolumesResponse
 	params := url.Values{}
 	params.Set("virtualmachineid", vmid)
 	params.Set("listall", "true")
+
+	if account != "" {
+		params.Set("account", account)
+	}
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
+
 	response, err := NewRequest(c, "listVolumes", params)
 	if err != nil {
 		return resp, err
@@ -30,6 +38,7 @@ type Volume struct {
 	ID                         string        `json:"id"`
 	Isextractable              bool          `json:"isextractable"`
 	Name                       string        `json:"name"`
+	ProjectId                  string        `json:"projectid"`
 	Serviceofferingdisplaytext string        `json:"serviceofferingdisplaytext"`
 	Serviceofferingid          string        `json:"serviceofferingid"`
 	Serviceofferingname        string        `json:"serviceofferingname"`
