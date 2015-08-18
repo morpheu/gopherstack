@@ -33,12 +33,12 @@ func (c CloudstackClient) CreateTemplate(options *CreateTemplate) (CreateTemplat
 	if options.Passwordenabled {
 		params.Set("passwordenabled", "true")
 	}
-    if options.ProjectId != ""{
-        params.Set("projectid", options.ProjectId)
-    }
-    if options.Account != ""{
-        params.Set("account", options.Account)
-    }
+	if options.ProjectId != "" {
+		params.Set("projectid", options.ProjectId)
+	}
+	if options.Account != "" {
+		params.Set("account", options.Account)
+	}
 
 	response, err := NewRequest(c, "createTemplate", params)
 	if err != nil {
@@ -56,7 +56,7 @@ func (c CloudstackClient) ListTemplates(name string, filter string, project_id s
 	params.Set("name", name)
 	params.Set("templatefilter", filter)
 
-    if account != "" {
+	if account != "" {
 		params.Set("account", account)
 	}
 	if project_id != "" {
@@ -78,7 +78,7 @@ func (c CloudstackClient) DeleteTemplate(id string, project_id string, account s
 	params := url.Values{}
 	params.Set("id", id)
 
-    if account != "" {
+	if account != "" {
 		params.Set("account", account)
 	}
 	if project_id != "" {
@@ -124,7 +124,7 @@ type Template struct {
 	Ostypeid         string  `json:"ostypeid"`
 	Ostypename       string  `json:"ostypename"`
 	Passwordenabled  bool    `json:"passwordenabled"`
-    ProjectId        string  `json:"projectid"`
+	ProjectId        string  `json:"projectid"`
 	Size             float64 `json:"size"`
 	Sourcetemplateid string  `json:"sourcetemplateid"`
 	Sshkeyenabled    bool    `json:"sshkeyenabled"`
@@ -153,6 +153,6 @@ type CreateTemplate struct {
 	Passwordenabled       bool   `json:"passwordenabled"`
 	Snapshotid            string `json:"snapshotid"`
 	Volumeid              string `json:"volumeid"`
-    ProjectId             string `json:"projectid"`
-    Account               string `json:"account"`
+	ProjectId             string `json:"projectid"`
+	Account               string `json:"account"`
 }

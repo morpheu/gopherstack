@@ -7,13 +7,16 @@ import (
 )
 
 // Deploys a Virtual Machine and returns it's id
-func (c CloudstackClient) DeployVirtualMachine(serviceofferingid string, templateid string, zoneid string, account string, diskofferingid string, displayname string, networkids []string, keypair string, projectid string, userdata string, hypervisor string) (DeployVirtualMachineResponse, error) {
+func (c CloudstackClient) DeployVirtualMachine(serviceofferingid string, templateid string, zoneid string, account string, diskofferingid string, displayname string, networkids []string, keypair string, projectid string, userdata string, hypervisor string, size string) (DeployVirtualMachineResponse, error) {
 	var resp DeployVirtualMachineResponse
 
 	params := url.Values{}
 	params.Set("serviceofferingid", serviceofferingid)
 	params.Set("templateid", templateid)
 	params.Set("zoneid", zoneid)
+	if size != "" {
+		params.Set("size", size)
+	}
 	if account != "" {
 		params.Set("account", account)
 	}

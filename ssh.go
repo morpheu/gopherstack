@@ -9,12 +9,12 @@ func (c CloudstackClient) CreateSSHKeyPair(name string, projectid string, accoun
 	var resp CreateSshKeyPairResponse
 	params := url.Values{}
 	params.Set("name", name)
-    if projectid != "" {
-	    params.Set("projectid", projectid)
-    }
-    if account != "" {
-	    params.Set("account", account)
-    }
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
+	if account != "" {
+		params.Set("account", account)
+	}
 	response, err := NewRequest(c, "createSSHKeyPair", params)
 	if err != nil {
 		return resp, err
@@ -28,12 +28,12 @@ func (c CloudstackClient) DeleteSSHKeyPair(name string, projectid string, accoun
 	var resp DeleteSshKeyPairResponse
 	params := url.Values{}
 	params.Set("name", name)
-    if projectid != "" {
-	    params.Set("projectid", projectid)
-    }
-    if account != "" {
-	    params.Set("account", account)
-    }
+	if projectid != "" {
+		params.Set("projectid", projectid)
+	}
+	if account != "" {
+		params.Set("account", account)
+	}
 	response, err := NewRequest(c, "deleteSSHKeyPair", params)
 	if err != nil {
 		return resp, err
