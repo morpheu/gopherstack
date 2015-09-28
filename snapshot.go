@@ -31,7 +31,7 @@ func (c CloudstackClient) ListSnapshots(volumeid string, projectid string, accou
 	return resp, err
 }
 
-func (c CloudstackClient) createSnapshot(volumeid string, projectid string, account string) (CreateSnapshotResponse, error) {
+func (c CloudstackClient) CreateSnapshot(volumeid string, projectid string, account string) (CreateSnapshotResponse, error) {
 	var resp CreateSnapshotResponse
 	params := url.Values{}
 
@@ -57,7 +57,7 @@ func (c CloudstackClient) createSnapshot(volumeid string, projectid string, acco
 	return resp, err
 }
 
-func (c CloudstackClient) deleteSnapshot(snapshotid string, projectid string, account string) (DeleteSnapshotResponse, error) {
+func (c CloudstackClient) DeleteSnapshot(snapshotid string, projectid string, account string) (DeleteSnapshotResponse, error) {
 	var resp DeleteSnapshotResponse
 	params := url.Values{}
 
@@ -109,7 +109,7 @@ type ListSnapshotsResponse struct {
 type CreateSnapshotResponse struct {
 	Createsnapshotresponse struct {
 		ID    string `json:"id"`
-		Jobid string `json:"jobid"`
+		JobId string `json:"jobid"`
 	} `json:"createsnapshotresponse"`
 }
 
