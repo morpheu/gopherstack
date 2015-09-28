@@ -171,6 +171,21 @@ func NewRequest(c CloudstackClient, request string, params url.Values) (interfac
 		json.Unmarshal(body, &decodedResponse)
 		return decodedResponse, nil
 
+	case "listSnapshots":
+		var decodedResponse ListSnapshotsResponse
+		json.Unmarshal(body, &decodedResponse)
+		return decodedResponse, nil
+
+	case "createSnapshot":
+		var decodedResponse CreateSnapshotResponse
+		json.Unmarshal(body, &decodedResponse)
+		return decodedResponse, nil
+
+	case "deleteSnapshot":
+		var decodedResponse DeleteSnapshotResponse
+		json.Unmarshal(body, &decodedResponse)
+		return decodedResponse, nil
+
 	}
 
 	// only reached with unknown request
